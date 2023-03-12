@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/7ab807101d.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <title>SignIn and SignUp</title>
+</head>
+<body>
+    <div class="container">
+        <div class="form-box">
+            <h1 id="title">Sign Up</h1>
+            <form action="">
+                <div class="input-group">
+                    <div class="input-field" id="nameField">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" placeholder="Name" id="n1">
+                    </div>
+                    <div class="input-field">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" placeholder="Email" id="e1">
+                    </div>
+                    <div class="input-field">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" placeholder="Password" id="p1">
+                    </div>
+                    <p>Forgot password?<a href="#"><a href="">  CLICK HERE</a></a></p>
+                </div>
+                <div class="btn-field">
+                    <button type="button" id="signUpBtn">Sign Up</button>
+                    <button type="button" class="disable" id="signInBtn">Sign In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let signUpBtn = document.getElementById("signUpBtn");
+        let signInBtn = document.getElementById("signInBtn");
+        let nameField = document.getElementById("nameField");
+        let title = document.getElementById("title");
+        let isLoginDisplayed = false;
+        let clickCount = 0;
+        let clickCountSU = 0;
+
+        var letters = /^[A-Za-z]+$/;
+        var email_val = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+        signInBtn.onclick = function(){
+            clickCountSU = 0;
+            clickCount++;
+            nameField.style.maxHeight = "0";
+            title.innerHTML="Sign In";
+            signUpBtn.classList.add("disable");
+            signInBtn.classList.remove("disable");
+            var n = document.getElementById("n1").value;
+            var e = document.getElementById("e1").value;
+            var p = document.getElementById("p1").value;
+            if(clickCount >= 2){
+                if(e==''||p==''){
+                    alert("Enter each details correctly");
+                }
+                else if(!email_val.test(e)){
+                    alert('Invalid email format! Please enter valid email');
+                }
+                else if(document.getElementById("p1").value.length > 12){
+                    alert("Password maximum length is 12");
+                }
+                else if(document.getElementById("p1").value.length < 6){
+                    alert("Password minimum length is 6");
+                }
+                else{
+                    alert("Logged in successfully");
+                }
+            }
+        }
+
+
+        signUpBtn.onclick = function(){
+            clickCount = 0;
+            clickCountSU++;
+            nameField.style.maxHeight = "60px";
+            title.innerHTML="Sign Up";
+            signUpBtn.classList.remove("disable");
+            signInBtn.classList.add("disable");
+            var n = document.getElementById("n1").value;
+            var e = document.getElementById("e1").value;
+            var p = document.getElementById("p1").value;
+            if(clickCountSU>=2){
+                if(n==''||e==''||p==''){
+                    alert("Enter each details correctly");
+                }
+                else if(!letters.test(n)){
+                    alert('Name is incorrect! Must contain alphabets');
+                }
+                else if(!email_val.test(e)){
+                    alert('Invalid email format! Please enter valid email');
+                }
+                else if(document.getElementById("p1").value.length > 12){
+                    alert("Password maximum length is 12");
+                }
+                else if(document.getElementById("p1").value.length < 6){
+                    alert("Password minimum length is 6");
+                }
+                else{
+                    alert("Registered Succesfully");
+                }
+            }
+        }
+    
+    </script>
+    
+</body>
+</html>
